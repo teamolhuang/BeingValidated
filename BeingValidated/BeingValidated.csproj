@@ -2,6 +2,19 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
+        <PackageVersion>0.0.1</PackageVersion>
+        <Title>BeingValidated</Title>
+        <Authors>teamolhuang</Authors>
+        <Description>A small tool, mainly for input object (request model, etc.) validation, I personally wrote and used in business projects. Its main purpose is to have validation codes more uniformed, and can be also used to construct a main method running multiple minor methods.
+
+            It targets .NET Standard 2.0 .
+        </Description>
+        <PackageProjectUrl>https://github.com/teamolhuang/BeingValidated</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/teamolhuang/BeingValidated</RepositoryUrl>
+        <RepositoryType>github</RepositoryType>
+        <PackageReleaseNotes>https://choosealicense.com/licenses/bsd-3-clause/</PackageReleaseNotes>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <PackageLicenseUrl>https://choosealicense.com/licenses/bsd-3-clause/</PackageLicenseUrl>
     </PropertyGroup>
 
 </Project>
