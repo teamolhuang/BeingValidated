@@ -15,6 +15,7 @@
         <PackageReleaseNotes>https://choosealicense.com/licenses/bsd-3-clause/</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <PackageLicenseUrl>https://choosealicense.com/licenses/bsd-3-clause/</PackageLicenseUrl>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
 
 </Project>
