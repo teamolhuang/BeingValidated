@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 namespace BeingValidated
 {
     /// <summary>
-    /// A wrapper class for validating an enumerable. <br/>
-    /// It's recommended that you use <see cref="BeingValidatedHelperMethods.StartValidateElements{T}"/> to get this.
+    ///     A wrapper class for validating an enumerable. <br />
+    ///     It's recommended that you use <see cref="BeingValidatedHelperMethods.StartValidateElements{T}" /> to get this.
     /// </summary>
     /// <typeparam name="TElement">Generic type for the element in the enumerable to be validated</typeparam>
     /// <typeparam name="TEnumerable">Generic type for the enumerable</typeparam>
@@ -15,10 +15,10 @@ namespace BeingValidated
     {
         private readonly IBeingValidated<TEnumerable, TEnumerable> _inner;
         private readonly TEnumerable _targetEnumerable;
-        private Predicate<TElement> _forceSkipCondition = null;
+        private Predicate<TElement> _forceSkipCondition;
 
         /// <summary>
-        /// It's recommended that you use <see cref="BeingValidatedHelperMethods.StartValidateElements{T}"/> to get this.
+        ///     It's recommended that you use <see cref="BeingValidatedHelperMethods.StartValidateElements{T}" /> to get this.
         /// </summary>
         public BeingValidatedEnumerable(TEnumerable target, bool skipIfAlreadyInvalid = false)
         {
@@ -27,9 +27,12 @@ namespace BeingValidated
         }
 
         /// <summary>
-        /// Validate every element in the enumerable with provided validation.
+        ///     Validate every element in the enumerable with provided validation.
         /// </summary>
-        /// <param name="validation">A method for validation, which should accept TElement as input, and outputs boolean for indicating if validation passed.</param>
+        /// <param name="validation">
+        ///     A method for validation, which should accept TElement as input, and outputs boolean for
+        ///     indicating if validation passed.
+        /// </param>
         /// <param name="onFail">(Optional) Method to execute on validation failed.</param>
         /// <param name="onException">(Optional) Method to execute on exception. By default, exception will not be caught.</param>
         /// <returns>This IBeingValidated</returns>
@@ -50,9 +53,12 @@ namespace BeingValidated
         }
 
         /// <summary>
-        /// Validate every element in the enumerable with provided validation.
+        ///     Validate every element in the enumerable with provided validation.
         /// </summary>
-        /// <param name="validation">A method for validation, which should accept TElement as input, and outputs boolean for indicating if validation passed.</param>
+        /// <param name="validation">
+        ///     A method for validation, which should accept TElement as input, and outputs boolean for
+        ///     indicating if validation passed.
+        /// </param>
         /// <param name="onException">(Optional) Method to execute on exception. By default, exception will not be caught.</param>
         /// <returns>This IBeingValidated</returns>
         public IBeingValidated<TElement, TEnumerable> Validate(Action<TElement> validation,
@@ -71,13 +77,21 @@ namespace BeingValidated
         }
 
         /// <summary>
-        /// Asynchronously validate every element in the enumerable with provided validation.
+        ///     Asynchronously validate every element in the enumerable with provided validation.
         /// </summary>
-        /// <param name="validation">A method for validation, which should accept TElement as input, and outputs boolean for indicating if validation passed.</param>
+        /// <param name="validation">
+        ///     A method for validation, which should accept TElement as input, and outputs boolean for
+        ///     indicating if validation passed.
+        /// </param>
         /// <param name="onFail">(Optional) Method to execute on validation failed.</param>
         /// <param name="onException">(Optional) Method to execute on exception. By default, exception will not be caught.</param>
         /// <returns>This IBeingValidated</returns>
-        /// <remarks><b>This doesn't distribute the validation of multiple elements towards different threads. It's only to support validation methods that uses async/await.</b></remarks>
+        /// <remarks>
+        ///     <b>
+        ///         This doesn't distribute the validation of multiple elements towards different threads. It's only to support
+        ///         validation methods that uses async/await.
+        ///     </b>
+        /// </remarks>
         public async Task<IBeingValidated<TElement, TEnumerable>> ValidateAsync(Func<TElement, Task<bool>> validation,
             Action<TElement> onFail = null, Action<TElement, Exception> onException = null)
         {
@@ -95,12 +109,20 @@ namespace BeingValidated
         }
 
         /// <summary>
-        /// Asynchronously validate every element in the enumerable with provided validation.
+        ///     Asynchronously validate every element in the enumerable with provided validation.
         /// </summary>
-        /// <param name="validation">A method for validation, which should accept TElement as input, and outputs boolean for indicating if validation passed.</param>
+        /// <param name="validation">
+        ///     A method for validation, which should accept TElement as input, and outputs boolean for
+        ///     indicating if validation passed.
+        /// </param>
         /// <param name="onException">(Optional) Method to execute on exception. By default, exception will not be caught.</param>
         /// <returns>This IBeingValidated</returns>
-        /// <remarks><b>This doesn't distribute the validation of multiple elements towards different threads. It's only to support validation methods that uses async/await.</b></remarks>
+        /// <remarks>
+        ///     <b>
+        ///         This doesn't distribute the validation of multiple elements towards different threads. It's only to support
+        ///         validation methods that uses async/await.
+        ///     </b>
+        /// </remarks>
         public async Task<IBeingValidated<TElement, TEnumerable>> ValidateAsync(Func<TElement, Task> validation,
             Action<TElement, Exception> onException)
         {

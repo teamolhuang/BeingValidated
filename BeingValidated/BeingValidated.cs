@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 namespace BeingValidated
 {
     /// <summary>
-    /// A wrapper class for validating an object. <br/>
-    /// It's recommended that you use <see cref="BeingValidatedHelperMethods.StartValidate{T}"/> to get this.
+    ///     A wrapper class for validating an object. <br />
+    ///     It's recommended that you use <see cref="BeingValidatedHelperMethods.StartValidate{T}" /> to get this.
     /// </summary>
     /// <typeparam name="T">Generic type for object to be validated</typeparam>
     public class BeingValidated<T> : IBeingValidated<T, T>
@@ -16,7 +16,7 @@ namespace BeingValidated
         private bool _skipIfInvalid;
 
         /// <summary>
-        /// It's recommended that you use <see cref="BeingValidatedHelperMethods.StartValidate{T}"/> to get this.
+        ///     It's recommended that you use <see cref="BeingValidatedHelperMethods.StartValidate{T}" /> to get this.
         /// </summary>
         public BeingValidated(T target, bool skipIfInvalid = false)
         {
@@ -26,7 +26,10 @@ namespace BeingValidated
         }
 
         /// <inheritdoc />
-        public bool IsValid() => !_isInvalid;
+        public bool IsValid()
+        {
+            return !_isInvalid;
+        }
 
         /// <inheritdoc />
         public IBeingValidated<T, T> Validate(Func<T, bool> validation, Action<T> onFail = null,
@@ -36,10 +39,7 @@ namespace BeingValidated
 
             try
             {
-                if (!validation.Invoke(_target))
-                {
-                    DoWhenFail(onFail);
-                }
+                if (!validation.Invoke(_target)) DoWhenFail(onFail);
             }
             catch (Exception e)
             {
@@ -74,10 +74,7 @@ namespace BeingValidated
 
             try
             {
-                if (!await validation.Invoke(_target))
-                {
-                    DoWhenFail(onFail);
-                }
+                if (!await validation.Invoke(_target)) DoWhenFail(onFail);
             }
             catch (Exception e)
             {
@@ -141,6 +138,9 @@ namespace BeingValidated
             _isInvalid = true;
         }
 
-        private bool CanSkip() => _forceSkip || _skipIfInvalid && _isInvalid;
+        private bool CanSkip()
+        {
+            return _forceSkip || _skipIfInvalid && _isInvalid;
+        }
     }
 }
