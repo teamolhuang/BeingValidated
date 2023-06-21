@@ -22,7 +22,7 @@ bool isValid = input.StartValidate()
 
 There is also `ValidateAsync()` for running async methods.
 
-```
+```csharp
 bool isValid = await input.StartValidate()
                     .Validate(i => i.UserId > 0,
                               i => response.AddError($"ID ({i}) not valid!"))
