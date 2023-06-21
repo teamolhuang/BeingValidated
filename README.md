@@ -1,6 +1,6 @@
 # BeingValidated
 ---
-![Nuget](https://img.shields.io/nuget/v/BeingValidated?link=https%3A%2F%2Fwww.nuget.org%2Fpackages%2FBeingValidated)
+[![Nuget](https://img.shields.io/nuget/v/BeingValidated)](https://www.nuget.org/packages/BeingValidated)
 
 A small tool, mainly for input object (request model, etc.) validation, I personally wrote and used in business projects. 
 Its main purpose is to have validation codes more uniformed, and can be also used to construct a main method running multiple minor methods.
