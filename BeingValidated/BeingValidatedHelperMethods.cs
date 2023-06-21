@@ -68,7 +68,7 @@ namespace BeingValidated
             Func<TInput, Task> validation,
             Action<Exception> onException = null)
         {
-            // This allows user to use syntax like this for  onException:
+            // This allows user to use syntax like this for onException:
             // () => ...
             // If they don't need exception info for onException.
             return await target.ValidateAsync(validation, (_, e) => onException?.Invoke(e));

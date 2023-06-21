@@ -27,8 +27,7 @@ namespace BeingValidated
         ///     Execute validation against TInput.
         /// </summary>
         /// <param name="validation">
-        ///     A method for validation, which should accept TInput as input, and outputs boolean for
-        ///     indicating if validation passed.
+        ///     A method for validation, which should accept TInput as input, and has no output.
         /// </param>
         /// <param name="onException">(Optional) Method to execute on exception. By default, exception will not be caught.</param>
         /// <returns>This IBeingValidation</returns>
@@ -52,8 +51,7 @@ namespace BeingValidated
         ///     Asynchronously validate TInput with provided validation.
         /// </summary>
         /// <param name="validation">
-        ///     A method for validation, which should accept TInput as input, and outputs boolean for
-        ///     indicating if validation passed.
+        ///     A method for validation, which should accept TInput as input, and has no output.
         /// </param>
         /// <param name="onException">(Optional) Method to execute on exception. By default, exception will not be caught.</param>
         /// <returns>This IBeingValidated</returns>

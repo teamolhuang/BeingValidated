@@ -56,8 +56,7 @@ namespace BeingValidated
         ///     Validate every element in the enumerable with provided validation.
         /// </summary>
         /// <param name="validation">
-        ///     A method for validation, which should accept TElement as input, and outputs boolean for
-        ///     indicating if validation passed.
+        ///     A method for validation, which should accept TElement as input, and has no output.
         /// </param>
         /// <param name="onException">(Optional) Method to execute on exception. By default, exception will not be caught.</param>
         /// <returns>This IBeingValidated</returns>
@@ -112,8 +111,7 @@ namespace BeingValidated
         ///     Asynchronously validate every element in the enumerable with provided validation.
         /// </summary>
         /// <param name="validation">
-        ///     A method for validation, which should accept TElement as input, and outputs boolean for
-        ///     indicating if validation passed.
+        ///     A method for validation, which should accept TElement as input, and has no output.
         /// </param>
         /// <param name="onException">(Optional) Method to execute on exception. By default, exception will not be caught.</param>
         /// <returns>This IBeingValidated</returns>
