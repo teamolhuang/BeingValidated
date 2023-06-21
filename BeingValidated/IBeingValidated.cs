@@ -3,6 +3,10 @@ using System.Threading.Tasks;
 
 namespace BeingValidated
 {
+    /// <summary>
+    /// The interface of wrapper classes for validating certain object.
+    /// It is recommended to use helper methods like <see cref="BeingValidatedHelperMethods.StartValidate{T}"/> to get concrete classes.
+    /// </summary>
     public interface IBeingValidated<TInput, TOutput>
     {
         /// <summary>
@@ -44,7 +48,7 @@ namespace BeingValidated
             Action<TInput, Exception> onException = null);
 
         /// <summary>
-        /// Returns the result of validation。
+        /// Returns the result of validation.
         /// </summary>
         /// <returns>
         /// true：Validation passed.<br/>

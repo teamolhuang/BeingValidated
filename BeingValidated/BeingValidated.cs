@@ -3,8 +3,6 @@ using System.Threading.Tasks;
 
 namespace BeingValidated
 {
-    // 用於驗證物件狀態時的 Wrapper，可以透過 ExtensionMethods 的 StartValidate() 取得。
-    
     /// <summary>
     /// A wrapper class for validating an object. <br/>
     /// It's recommended that you use <see cref="BeingValidatedHelperMethods.StartValidate{T}"/> to get this.
