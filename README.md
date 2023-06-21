@@ -16,7 +16,7 @@ GetUserResponse response = new();
 
 bool isValid = input.StartValidate()
                     .Validate(i => i.UserId > 0,
-                              i => response.AddError($"ID ({i}) not valid!"))
+                              i => response.AddError($"ID ({i.UserId}) not valid!"))
                     .Validate(i => i.MustProvide != null,
                               _ => response.AddError("MustProvide must be provided!")
                     .IsValid();
@@ -27,9 +27,9 @@ There is also `ValidateAsync()` for running async methods.
 ```csharp
 bool isValid = await input.StartValidate()
                     .Validate(i => i.UserId > 0,
-                              i => response.AddError($"ID ({i}) not valid!"))
+                              i => response.AddError($"ID ({i.UserId}) not valid!"))
                     .ValidateAsync(async i => await dbContext.User.AnyAsync(u => u.Id == i.UserId),
-                                         i => response.AddError($"ID ({i}) not found!",
+                                         i => response.AddError($"ID ({i.UserId}) not found!",
                                          e => response.AddError($"DB Query failed: {e.Message}")
                     .IsValid();
 ```
@@ -41,9 +41,9 @@ A `Validate()`, or `ValidateAsync()` provides 3 parameters, listed in the order 
 
 ## Usage - enumerable
 ---
-To validate an enumerable, you can either use the `.StartValidate()` above to validate the emuerable object, or use `.StartValidateElements()` to validate every element.
+To validate an enumerable, you can either use the `.StartValidate()` above to validate the emuerable object, or use `.StartValidateElements()` to validate every element in it.
 
-Let's say we defined a `GetUsersList`, and there's a `IEnumerable<int> IdList` in it.
+Let's say we defined a `GetUsersRequest`, and there's a `IEnumerable<int> IdList` in it.
 ```csharp
 GetUsersRequest input = ...; // accepted from client
 GetUsersResponse response = new();
