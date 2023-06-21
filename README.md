@@ -3,6 +3,8 @@
 A small tool, mainly for input object (request model, etc.) validation, I personally wrote and used in business projects. 
 Its main purpose is to have validation codes more uniformed, and can be also used to construct a main method running multiple minor methods.
 
+It targets .NET Standard 2.0 .
+
 ## Usage
 ---
 To start validating with an IBeingValidated, use `.StartValidate()` or `.StartValidateElements()`.
