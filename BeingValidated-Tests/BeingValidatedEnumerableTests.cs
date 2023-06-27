@@ -14,7 +14,7 @@ namespace BeingValidated_Tests
             // exceptions are thrown instead of silently ignored.
 
             // Arrange
-            string testString = "I am funny!";
+            string testString = "Test test";
             int exceptionContent = new Random().Next();
 
             // Act
@@ -27,6 +27,11 @@ namespace BeingValidated_Tests
             Assert.AreEqual(exceptionContent.ToString(), actual.Message);
         }
 
+        private Task ValidateAsync_DummyValidationMethod(string message)
+        {
+            throw new Exception(message);
+        }
+
         [Test]
         public async Task ValidateAsync_WillCheckOnExceptionIsNull_AndSetToDefaultBehaviour()
         {
@@ -34,12 +39,12 @@ namespace BeingValidated_Tests
             // exceptions are thrown instead of silently ignored.
 
             // Arrange
-            string testString = "I am funny!";
+            string testString = "Test test";
             int exceptionContent = new Random().Next();
 
             // Act
-            Exception actual = Assert.Catch<Exception>(() => testString.StartValidateElements()
-                .ValidateAsync(async _ => await Task.FromException(new Exception(exceptionContent.ToString()))));
+            Exception actual = Assert.CatchAsync<Exception>(async () => await testString.StartValidateElements()
+                .ValidateAsync(async _ => await ValidateAsync_DummyValidationMethod(exceptionContent.ToString())));
 
             // Assert
             Assert.IsNotNull(actual);

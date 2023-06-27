@@ -39,6 +39,9 @@ namespace BeingValidated
         public IBeingValidated<TElement, TEnumerable> Validate(Func<TElement, bool> validation,
             Action<TElement> onFail = null, Action<TElement, Exception> onException = null)
         {
+            if (onException == null)
+                onException = DefaultOnException();
+
             foreach (TElement element in _targetEnumerable)
             {
                 if (NeedForceSkipping(element))
@@ -46,7 +49,8 @@ namespace BeingValidated
 
                 _inner.Validate(_ => validation.Invoke(element),
                     _ => onFail?.Invoke(element),
-                    (_, e) => onException?.Invoke(element, e));
+                    (_, e) => onException.Invoke(element, e)
+                );
             }
 
             return this;
@@ -89,6 +93,9 @@ namespace BeingValidated
         public async Task<IBeingValidated<TElement, TEnumerable>> ValidateAsync(Func<TElement, Task<bool>> validation,
             Action<TElement> onFail = null, Action<TElement, Exception> onException = null)
         {
+            if (onException == null)
+                onException = DefaultOnException();
+
             foreach (TElement element in _targetEnumerable)
             {
                 if (NeedForceSkipping(element))
@@ -96,7 +103,7 @@ namespace BeingValidated
 
                 await _inner.ValidateAsync(async _ => await validation.Invoke(element),
                     _ => onFail?.Invoke(element),
-                    (_, e) => onException?.Invoke(element, e));
+                    (_, e) => onException.Invoke(element, e));
             }
 
             return this;
@@ -117,12 +124,12 @@ namespace BeingValidated
         ///     </b>
         /// </remarks>
         public async Task<IBeingValidated<TElement, TEnumerable>> ValidateAsync(Func<TElement, Task> validation,
-            Action<TElement, Exception> onException)
+            Action<TElement, Exception> onException = null)
         {
-            return await ValidateAsync(element =>
+            return await ValidateAsync(async element =>
                 {
-                    validation.Invoke(element);
-                    return Task.FromResult(true);
+                    await validation.Invoke(element);
+                    return true;
                 },
                 null,
                 onException);
@@ -153,6 +160,11 @@ namespace BeingValidated
         {
             _forceSkipCondition = null;
             return this;
+        }
+
+        private static Action<TElement, Exception> DefaultOnException()
+        {
+            return (_, e) => throw e;
         }
 
         private bool NeedForceSkipping(TElement element)
