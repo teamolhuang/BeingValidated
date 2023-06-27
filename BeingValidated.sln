@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeingValidated", "BeingValidated\BeingValidated.csproj", "{02B418D7-14DC-4D20-8611-96E88C98F70E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeingValidated-Tests", "BeingValidated-Tests\BeingValidated-Tests.csproj", "{A7622E13-C467-4393-8BC7-2DC59E6768C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{02B418D7-14DC-4D20-8611-96E88C98F70E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02B418D7-14DC-4D20-8611-96E88C98F70E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02B418D7-14DC-4D20-8611-96E88C98F70E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7622E13-C467-4393-8BC7-2DC59E6768C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7622E13-C467-4393-8BC7-2DC59E6768C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7622E13-C467-4393-8BC7-2DC59E6768C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7622E13-C467-4393-8BC7-2DC59E6768C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
