@@ -10,7 +10,7 @@ namespace BeingValidated
     public static class BeingValidatedHelperMethods
     {
         /// <summary>
-        ///     Wrap an object into a <see cref="IBeingValidated{TInput,TOutput}" />> to start validation.
+        ///     Wrap an object into a <see cref="IBeingValidated{TValidated,TOriginal}" />> to start validation.
         /// </summary>
         /// <param name="target">Object to validate.</param>
         /// <param name="skipIfAlreadyInvalid">
@@ -25,9 +25,9 @@ namespace BeingValidated
         }
 
         /// <inheritdoc
-        ///     cref="IBeingValidated{TInput,TOutput}.Validate(Func{TInput, bool}, Action{TInput}, Action{TInput, Exception})" />
-        public static IBeingValidated<TInput, TOutput> Validate<TInput, TOutput>(
-            this IBeingValidated<TInput, TOutput> target, Func<TInput, bool> validation, Action onFail = null,
+        ///     cref="IBeingValidated{TValidated,TOriginal}.Validate(Func{TValidated, bool}, Action{TValidated}, Action{TValidated, Exception})" />
+        public static IBeingValidated<TValidated, TOriginal> Validate<TValidated, TOriginal>(
+            this IBeingValidated<TValidated, TOriginal> target, Func<TValidated, bool> validation, Action onFail = null,
             Action<Exception> onException = null)
         {
             // This allows user to use syntax like this for onException:
@@ -36,10 +36,10 @@ namespace BeingValidated
             return target.Validate(validation, _ => onFail?.Invoke(), (_, e) => onException?.Invoke(e));
         }
 
-        /// <inheritdoc cref="IBeingValidated{TInput,TOutput}.Validate(Action{TInput}, Action{TInput, Exception})" />
-        public static IBeingValidated<TInput, TOutput> Validate<TInput, TOutput>(
-            this IBeingValidated<TInput, TOutput> target,
-            Action<TInput> validation,
+        /// <inheritdoc cref="IBeingValidated{TValidated,TOriginal}.Validate(Action{TValidated}, Action{TValidated, Exception})" />
+        public static IBeingValidated<TValidated, TOriginal> Validate<TValidated, TOriginal>(
+            this IBeingValidated<TValidated, TOriginal> target,
+            Action<TValidated> validation,
             Action<Exception> onException = null)
         {
             // This allows user to use syntax like this for onFail or onException:
@@ -49,10 +49,10 @@ namespace BeingValidated
         }
 
         /// <inheritdoc
-        ///     cref="IBeingValidated{TInput,TOutput}.ValidateAsync(Func{TInput, Task{bool}}, Action{TInput}, Action{TInput, Exception})" />
-        public static async Task<IBeingValidated<TInput, TOutput>> ValidateAsync<TInput, TOutput>(
-            this IBeingValidated<TInput, TOutput> target,
-            Func<TInput, Task<bool>> validation,
+        ///     cref="IBeingValidated{TValidated,TOriginal}.ValidateAsync(Func{TValidated, Task{bool}}, Action{TValidated}, Action{TValidated, Exception})" />
+        public static async Task<IBeingValidated<TValidated, TOriginal>> ValidateAsync<TValidated, TOriginal>(
+            this IBeingValidated<TValidated, TOriginal> target,
+            Func<TValidated, Task<bool>> validation,
             Action onFail = null,
             Action<Exception> onException = null)
         {
@@ -62,10 +62,10 @@ namespace BeingValidated
             return await target.ValidateAsync(validation, _ => onFail?.Invoke(), (_, e) => onException?.Invoke(e));
         }
 
-        /// <inheritdoc cref="IBeingValidated{TInput,TOutput}.ValidateAsync(Func{TInput, Task}, Action{TInput, Exception})" />
-        public static async Task<IBeingValidated<TInput, TOutput>> ValidateAsync<TInput, TOutput>(
-            this IBeingValidated<TInput, TOutput> target,
-            Func<TInput, Task> validation,
+        /// <inheritdoc cref="IBeingValidated{TValidated,TOriginal}.ValidateAsync(Func{TValidated, Task}, Action{TValidated, Exception})" />
+        public static async Task<IBeingValidated<TValidated, TOriginal>> ValidateAsync<TValidated, TOriginal>(
+            this IBeingValidated<TValidated, TOriginal> target,
+            Func<TValidated, Task> validation,
             Action<Exception> onException = null)
         {
             // This allows user to use syntax like this for onException:
@@ -75,7 +75,7 @@ namespace BeingValidated
         }
 
         /// <summary>
-        ///     Wrap an enumerable into a <see cref="IBeingValidated{TInput,TOutput}" />> to start validation against its elements.
+        ///     Wrap an enumerable into a <see cref="IBeingValidated{TValidated,TOriginal}" />> to start validation against its elements.
         /// </summary>
         /// <param name="target">Object to validate.</param>
         /// <param name="skipIfAlreadyInvalid">

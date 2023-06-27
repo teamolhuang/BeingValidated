@@ -8,7 +8,7 @@ namespace BeingValidated
     ///     It is recommended to use helper methods like <see cref="BeingValidatedHelperMethods.StartValidate{T}" /> to get
     ///     concrete classes.
     /// </summary>
-    public interface IBeingValidated<TInput, TOutput>
+    public interface IBeingValidated<TValidated, TOriginal>
     {
         /// <summary>
         ///     Execute validation against TInput.
@@ -20,8 +20,9 @@ namespace BeingValidated
         /// <param name="onFail">(Optional) Method to execute on validation failed.</param>
         /// <param name="onException">(Optional) Method to execute on exception. By default, exception will not be caught.</param>
         /// <returns>This IBeingValidation</returns>
-        IBeingValidated<TInput, TOutput> Validate(Func<TInput, bool> validation, Action<TInput> onFail = null,
-            Action<TInput, Exception> onException = null);
+        IBeingValidated<TValidated, TOriginal> Validate(Func<TValidated, bool> validation,
+            Action<TValidated> onFail = null,
+            Action<TValidated, Exception> onException = null);
 
         /// <summary>
         ///     Execute validation against TInput.
@@ -31,8 +32,8 @@ namespace BeingValidated
         /// </param>
         /// <param name="onException">(Optional) Method to execute on exception. By default, exception will not be caught.</param>
         /// <returns>This IBeingValidation</returns>
-        IBeingValidated<TInput, TOutput> Validate(Action<TInput> validation,
-            Action<TInput, Exception> onException = null);
+        IBeingValidated<TValidated, TOriginal> Validate(Action<TValidated> validation,
+            Action<TValidated, Exception> onException = null);
 
         /// <summary>
         ///     Asynchronously validate TInput with provided validation.
@@ -44,8 +45,8 @@ namespace BeingValidated
         /// <param name="onFail">(Optional) Method to execute on validation failed.</param>
         /// <param name="onException">(Optional) Method to execute on exception. By default, exception will not be caught.</param>
         /// <returns>This IBeingValidated</returns>
-        Task<IBeingValidated<TInput, TOutput>> ValidateAsync(Func<TInput, Task<bool>> validation,
-            Action<TInput> onFail = null, Action<TInput, Exception> onException = null);
+        Task<IBeingValidated<TValidated, TOriginal>> ValidateAsync(Func<TValidated, Task<bool>> validation,
+            Action<TValidated> onFail = null, Action<TValidated, Exception> onException = null);
 
         /// <summary>
         ///     Asynchronously validate TInput with provided validation.
@@ -55,8 +56,8 @@ namespace BeingValidated
         /// </param>
         /// <param name="onException">(Optional) Method to execute on exception. By default, exception will not be caught.</param>
         /// <returns>This IBeingValidated</returns>
-        Task<IBeingValidated<TInput, TOutput>> ValidateAsync(Func<TInput, Task> validation,
-            Action<TInput, Exception> onException = null);
+        Task<IBeingValidated<TValidated, TOriginal>> ValidateAsync(Func<TValidated, Task> validation,
+            Action<TValidated, Exception> onException = null);
 
         /// <summary>
         ///     Returns the result of validation.
@@ -72,19 +73,19 @@ namespace BeingValidated
         /// </summary>
         /// <param name="setTo">(Optional) Enable or disable this option. Default is true.</param>
         /// <returns>This IBeingValidated</returns>
-        IBeingValidated<TInput, TOutput> SkipIfAlreadyInvalid(bool setTo = true);
+        IBeingValidated<TValidated, TOriginal> SkipIfAlreadyInvalid(bool setTo = true);
 
         /// <summary>
         ///     Force skip any further validation - or until StopForceSkipping - when predication is true for TInput.
         /// </summary>
         /// <param name="predicate">Condition for force skipping.</param>
         /// <returns>This IBeingValidated</returns>
-        IBeingValidated<TInput, TOutput> ForceSkipIf(Predicate<TInput> predicate);
+        IBeingValidated<TValidated, TOriginal> ForceSkipIf(Predicate<TValidated> predicate);
 
         /// <summary>
         ///     Stop force skipping.
         /// </summary>
         /// <returns>This IBeingValidated</returns>
-        IBeingValidated<TInput, TOutput> StopForceSkipping();
+        IBeingValidated<TValidated, TOriginal> StopForceSkipping();
     }
 }
