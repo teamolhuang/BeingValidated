@@ -52,18 +52,13 @@ namespace BeingValidated
         /// <inheritdoc />
         public IBeingValidated<T, T> Validate(Action<T> validation, Action<T, Exception> onException = null)
         {
-            if (CanSkip()) return this;
-
-            try
-            {
-                validation.Invoke(_target);
-            }
-            catch (Exception e)
-            {
-                DoWhenException(onException, e);
-            }
-
-            return this;
+            return Validate(_ =>
+                {
+                    validation.Invoke(_target);
+                    return true;
+                },
+                null,
+                onException);
         }
 
         /// <inheritdoc />
@@ -88,18 +83,13 @@ namespace BeingValidated
         public async Task<IBeingValidated<T, T>> ValidateAsync(Func<T, Task> validation,
             Action<T, Exception> onException = null)
         {
-            if (CanSkip()) return this;
-
-            try
-            {
-                await validation.Invoke(_target);
-            }
-            catch (Exception e)
-            {
-                DoWhenException(onException, e);
-            }
-
-            return this;
+            return await ValidateAsync(async _ =>
+                {
+                    await validation.Invoke(_target);
+                    return true;
+                },
+                null,
+                onException);
         }
 
         /// <inheritdoc />
