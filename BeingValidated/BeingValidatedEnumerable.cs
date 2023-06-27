@@ -63,16 +63,11 @@ namespace BeingValidated
         public IBeingValidated<TElement, TEnumerable> Validate(Action<TElement> validation,
             Action<TElement, Exception> onException = null)
         {
-            foreach (TElement element in _targetEnumerable)
+            return Validate(element =>
             {
-                if (NeedForceSkipping(element))
-                    continue;
-
-                _inner.Validate(_ => validation.Invoke(element),
-                    (_, e) => onException?.Invoke(element, e));
-            }
-
-            return this;
+                validation.Invoke(element);
+                return true;
+            }, null, onException);
         }
 
         /// <summary>
@@ -124,16 +119,13 @@ namespace BeingValidated
         public async Task<IBeingValidated<TElement, TEnumerable>> ValidateAsync(Func<TElement, Task> validation,
             Action<TElement, Exception> onException)
         {
-            foreach (TElement element in _targetEnumerable)
-            {
-                if (NeedForceSkipping(element))
-                    continue;
-
-                await _inner.ValidateAsync(async _ => await validation.Invoke(element),
-                    (_, e) => onException?.Invoke(element, e));
-            }
-
-            return this;
+            return await ValidateAsync(element =>
+                {
+                    validation.Invoke(element);
+                    return Task.FromResult(true);
+                },
+                null,
+                onException);
         }
 
         /// <inheritdoc />
