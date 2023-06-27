@@ -10,7 +10,7 @@ namespace BeingValidated
     public static class BeingValidatedHelperMethods
     {
         /// <summary>
-        ///     Wrap an object into a <see cref="IBeingValidated{TValidated,TOriginal}" />> to start validation.
+        ///     Wrap an object into a <see cref="IBeingValidated{TValidated,TOriginal}" /> to start validation.
         /// </summary>
         /// <param name="target">Object to validate.</param>
         /// <param name="skipIfAlreadyInvalid">
@@ -75,7 +75,7 @@ namespace BeingValidated
         }
 
         /// <summary>
-        ///     Wrap an enumerable into a <see cref="IBeingValidated{TValidated,TOriginal}" />> to start validation against its elements.
+        ///     Wrap an enumerable into a <see cref="IBeingValidated{TValidated,TOriginal}" /> to start validation against its elements.
         /// </summary>
         /// <param name="target">Object to validate.</param>
         /// <param name="skipIfAlreadyInvalid">
