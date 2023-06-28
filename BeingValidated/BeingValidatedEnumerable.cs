@@ -169,6 +169,7 @@ namespace BeingValidated
 
         private bool NeedForceSkipping(TElement element)
         {
+            // TODO: Caching? But if element state changed before clearing cache, might cause wrong result.
             return _forceSkipCondition?.Invoke(element) ?? false;
         }
     }
