@@ -142,6 +142,7 @@ namespace BeingValidated
         }
 
         /// <inheritdoc />
+        /// <remarks>Note that this skips every element once invalid, no matter which element caused it.</remarks>
         public IBeingValidated<TElement, TEnumerable> SkipIfAlreadyInvalid(bool setTo = true)
         {
             _inner.SkipIfAlreadyInvalid(setTo);
@@ -149,6 +150,7 @@ namespace BeingValidated
         }
 
         /// <inheritdoc />
+        /// <remarks>Unlike SkipIfAlreadyInvalid, this condition applies to single element instead of whole collection.</remarks>
         public IBeingValidated<TElement, TEnumerable> ForceSkipIf(Predicate<TElement> predicate)
         {
             _forceSkipCondition = predicate;
